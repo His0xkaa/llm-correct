@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "llm-correct"
+version = "0.1.0"
+description = "\"Auto correction and outputing your text\""
+authors = ["user1 <anon@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+mistralai = "^0.1.8"
+click = "^8.1.7"
+pyperclip = "^1.8.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
