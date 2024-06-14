@@ -3,17 +3,19 @@ import pyperclip
 import click
 
 # on récupère le texte copié dans le presse-papier
+# si le texte est vide, on demande à l'utilisateur de saisir le texte
 text = pyperclip.paste()
 
 # si le texte est vide, on demande à l'utilisateur de saisir le texte
 if not text:
     text = click.prompt("Enter text to correct", type=str)
+#
 
 
 def main(text):
 
     response = ollama.chat(
-        model="llama3",
+        model="gemma",
         messages=[
             {
                 "role": "user",
@@ -29,6 +31,7 @@ def main(text):
         ],
     )
     click.echo(response["message"]["content"])
+    pyperclip.copy(response["message"]["content"])
 
 
 if __name__ == "__main__":

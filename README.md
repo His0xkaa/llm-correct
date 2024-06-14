@@ -14,7 +14,7 @@ Projet d'autocorrection grammatical et d'orthographe genere par llm.
 
 ```shell
 cd llm-correct
-poetry install # installe toutes les dependances
+poetry install # install toutes les dependances
 poetry shell # cree et active l'environnement 
 chmod + wrapper_correct.sh
 ./wrapper_correcter.sh
