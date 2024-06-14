@@ -2,10 +2,10 @@ import ollama
 import pyperclip
 import click
 
-# default behavior is to read from clipboard
+# on récupère le texte copié dans le presse-papier
 text = pyperclip.paste()
 
-# if no text in clipboard, read from stdin with click
+# si le texte est vide, on demande à l'utilisateur de saisir le texte
 if not text:
     text = click.prompt("Enter text to correct", type=str)
 
