@@ -1,0 +1,34 @@
+name: 'Check codebase'
+on: [push]
+jobs:
+  check-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'checkout the codebase'
+        uses: actions/checkout@v4
+      - name: 'install CPython 3.8'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+      - name: 'install poetry'
+        uses: abatilo/actions-poetry@v3
+        with:
+          poetry-version: '1.8'
+      - name: 'setup a local virtual environment'
+        run: |
+          poetry config virtualenvs.create true --local
+          poetry config virtualenvs.in-project true --local
+      - name: 'define a cache for the virtual environment'
+        uses: actions/cache@v4
+        with:
+          path: ./.venv
+          key: venv-${{ hashFiles('poetry.lock') }}
+      - name: 'install the project dependencies'
+        run: |
+          poetry install
+          poetry add pylint
+          poetry add mypy
+      - name: 'check codebase'
+        run: |
+          poetry run pylint llmcorrect
+          poetry run mypy --strict llmcorrect
